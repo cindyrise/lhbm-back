@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path');
 const walkFile = require('./walk-file')
 
 /**
@@ -6,13 +7,9 @@ const walkFile = require('./walk-file')
  * @return {object} 
  */
 function getSqlMap () {
-  let basePath = __dirname
-  basePath = basePath.replace(/\\/g, '\/')
-
-  let pathArr = basePath.split('\/')
-  pathArr = pathArr.splice( 0, pathArr.length - 1 )
-  basePath = pathArr.join('/') + '/sql/'
-
+  let basePath = path.resolve(__dirname, '../init/');//指定根目录
+  basePath = basePath.replace(/\\/g, '\/');
+  basePath = basePath + '/'
   let fileList = walkFile( basePath, 'sql' )
   return fileList
 }

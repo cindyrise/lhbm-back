@@ -1,21 +1,24 @@
-const userModel = require('../lib/mysql.js')
+const model = require('./model.js')
 const md5 = require('md5')
-const checkNotLogin = require('../middlewares/check.js').checkNotLogin
-const checkLogin = require('../middlewares/check.js').checkLogin
+const checkNotLogin = require('../../middlewares/check.js').checkNotLogin
+const checkLogin = require('../../middlewares/check.js').checkLogin
 
-exports.getSignin = async ctx => {
-    await checkNotLogin(ctx)
-    await ctx.render('signin', {
-        session: ctx.session,
-    })
+exports.getIcon = async ctx => {
+    //await checkNotLogin(ctx)
+    // await ctx.render('login', {
+    //     session: ctx.session,
+    // })
+    ctx.body = {
+        code: 200,
+        message: '登录成功'
+    }
 }
-exports.postSignin = async ctx => {
-    console.log(ctx.request.body)
-    let { name, password } = ctx.request.body
-    await userModel.findDataByName(name)
+exports.updateIcon = async ctx => {
+    let { name, pwd } = ctx.request.body
+    await model.login(name)
         .then(result => {
             let res = result
-            if (res.length && name === res[0]['name'] && md5(password) === res[0]['pass']) {
+            if (res.length && name === res[0]['name'] && md5(pwd) === res[0]['pwd']) {
                 ctx.session = {
                     user: res[0]['name'],
                     id: res[0]['id']
@@ -37,4 +40,10 @@ exports.postSignin = async ctx => {
         }).catch(err => {
             console.log(err)
         })
+}
+
+exports.loginOut=async ctx=>{
+    ctx.session = null;
+    ctx.body = true;
+    console.log('登出成功')
 }

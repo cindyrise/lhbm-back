@@ -4,7 +4,7 @@ const bodyParser = require('koa-bodyparser');
 const ejs = require('ejs');
 const session = require('koa-session-minimal');
 const MysqlStore = require('koa-mysql-session');
-const config = require('./config/default.js');
+const conf  = require('./config/index');
 const router = require('koa-router')
 const views = require('koa-views')
 // const koaStatic = require('koa-static')
@@ -14,10 +14,10 @@ const app = new Koa()
 
 // session存储配置
 const sessionMysqlConfig= {
-  user: config.database.USERNAME,
-  password: config.database.PASSWORD,
-  database: config.database.DATABASE,
-  host: config.database.HOST,
+  user: conf.db.user,
+  password:  conf.db.password,
+  database:  conf.db.database,
+  host:  conf.db.host,
 }
 
 // 配置session中间件
@@ -47,13 +47,13 @@ app.use(bodyParser({
   formLimit: '1mb'
 }))
 
-//  路由
-app.use(require('./routers/signin.js').routes())
-app.use(require('./routers/signup.js').routes())
-app.use(require('./routers/posts.js').routes())
-app.use(require('./routers/signout.js').routes())
+app.use(require('./api/login/router.js').routes())
+app.use(require('./api/home/router.js').routes())
+app.use(require('./api/ad/router.js').routes())
+app.use(require('./api/icon/router.js').routes())
+app.use(require('./api/site/router.js').routes())
+app.use(require('./api/user/router.js').routes())
 
+app.listen(conf.server.port)
 
-app.listen(config.port)
-
-console.log(`listening on port ${config.port}`)
+console.log(`listening on port ${conf.server.port}`)

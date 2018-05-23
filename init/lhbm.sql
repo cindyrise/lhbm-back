@@ -23,20 +23,8 @@ CREATE TABLE `ad_info` (
   `id` int(64) NOT NULL AUTO_INCREMENT,
   `img_url` varchar(64) DEFAULT NULL,
   `city_id` varchar(64) DEFAULT NULL,
-  `type` varchar(16) DEFAULT NULL,
+  `sort` varchar(16) DEFAULT NULL,
   `remark` varchar(64) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Table structure for `bottom_nav`
--- ----------------------------
-DROP TABLE IF EXISTS `bottom_nav`;
-CREATE TABLE `bottom_nav` (
-  `id` int(64) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) DEFAULT NULL,
-  `url` varchar(128) DEFAULT NULL,
-  `remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -55,8 +43,8 @@ CREATE TABLE `city_info` (
 -- ----------------------------
 --  Table structure for `icon_nav`
 -- ----------------------------
-DROP TABLE IF EXISTS `icon_nav`;
-CREATE TABLE `icon_nav` (
+DROP TABLE IF EXISTS `icon_info`;
+CREATE TABLE `icon_info` (
   `id` int(64) NOT NULL AUTO_INCREMENT,
   `icon_code` varchar(64) DEFAULT NULL,
   `url_id` varchar(128) DEFAULT NULL,
@@ -83,8 +71,8 @@ CREATE TABLE `role_info` (
 -- ----------------------------
 --  Table structure for `url_info`
 -- ----------------------------
-DROP TABLE IF EXISTS `url_info`;
-CREATE TABLE `url_info` (
+DROP TABLE IF EXISTS `site_info`;
+CREATE TABLE `site_info` (
   `id` int(64) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
   `url` varchar(128) DEFAULT NULL,
@@ -98,8 +86,7 @@ CREATE TABLE `url_info` (
 DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info` (
   `id` int(64) NOT NULL AUTO_INCREMENT,
-  `nick_name` varchar(32) DEFAULT NULL,
-  `name` varchar(16) NOT NULL,
+  `name` varchar(32) NOT NULL,
   `pwd` varchar(64) DEFAULT NULL,
   `age` int(32) DEFAULT NULL,
   `address` varchar(64) DEFAULT NULL,
@@ -108,5 +95,9 @@ CREATE TABLE `user_info` (
   `remark` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into `lhbm`.`user_info`
+ ( `address`, `remark`, `age`, `role_id`, `sex`, `name`, `pwd`) 
+ values ( '地球', '\" \"', '18', '2', '1', 'admin', 'E10ADC3949BA59ABBE56E057F20F883E');
 
 SET FOREIGN_KEY_CHECKS = 1;

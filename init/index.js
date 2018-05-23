@@ -1,5 +1,5 @@
 const fs = require('fs');
-const getSqlContentMap = require('./util/get-sql-content-map');
+const getSqlContentMap = require('../utils/get-sql-content-map');
 const { query } = require('../utils/db');
 
 
@@ -17,10 +17,11 @@ let sqlContentMap = getSqlContentMap()
 
 // 执行建表sql脚本
 const createAllTables = async () => {
+  console.log(sqlContentMap,'sqlContentMap');
   for( let key in sqlContentMap ) {
     let sqlShell = sqlContentMap[key]
     let sqlShellList = sqlShell.split(';')
-
+    console.log(sqlShellList,'sqlShellList');
     for ( let [ i, shell ] of sqlShellList.entries() ) {
       if ( shell.trim() ) {
         let result = await query( shell )

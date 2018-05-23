@@ -7,7 +7,7 @@ const fs = require('fs')
  * @return {object}              返回遍历后的目录结果
  */
 const walkFile = function(  pathResolve , mime ){
-
+  console.log(pathResolve,'pathResolve');
   let files = fs.readdirSync( pathResolve )
 
   let fileList = {}
