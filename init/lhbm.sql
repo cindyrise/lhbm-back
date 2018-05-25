@@ -34,7 +34,7 @@ CREATE TABLE `ad_info` (
 DROP TABLE IF EXISTS `city_info`;
 CREATE TABLE `city_info` (
   `id` int(64) NOT NULL AUTO_INCREMENT,
-  `city_code` varchar(64) NOT NULL,
+  `code` varchar(64) NOT NULL,
   `name` varchar(32) NOT NULL,
   `remark` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -49,7 +49,7 @@ CREATE TABLE `icon_info` (
   `icon_code` varchar(64) DEFAULT NULL,
   `url_id` varchar(128) DEFAULT NULL,
   `name` varchar(64) DEFAULT NULL,
-  `city_id` int(11) DEFAULT NULL,
+  `city_code` int(11) DEFAULT NULL,
   `color` varchar(16) NOT NULL,
   `type` int(11) NOT NULL,
   `remark` varchar(64) NOT NULL,

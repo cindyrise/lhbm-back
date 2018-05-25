@@ -7,11 +7,21 @@ const { query } = require("../../utils/db");
  * @return  from_user  发送人id
  *  @return  avator  发送人头像
  */
-let login= function(name) {
+let getUser= function(name) {
     let _sql = `select * from user_info where name="${name}";`
     return query( _sql,name)
 };
+let createUser=function(obj){
+    let _sql = `select * from user_info where name="${name}";`
+    return query( _sql,name)
+}
+let updateUser=function(obj){
+    let _sql = `select * from user_info where name="${name}";`
+    return query( _sql,name)
+}
 
 module.exports = {
-	login
+    getUser,
+    createUser,
+    updateUser
 };

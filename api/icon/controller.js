@@ -4,14 +4,24 @@ const checkNotLogin = require('../../middlewares/check.js').checkNotLogin
 const checkLogin = require('../../middlewares/check.js').checkLogin
 
 exports.getIcon = async ctx => {
-    //await checkNotLogin(ctx)
-    // await ctx.render('login', {
-    //     session: ctx.session,
-    // })
-    ctx.body = {
-        code: 200,
-        message: '登录成功'
-    }
+    await model.getIcon({code:'',type:''})
+          .then(res=>{
+            ctx.body = {
+                code: 200,
+                data:res,
+                message: '登录成功'
+            }
+          })
+}
+exports.createIcon=async ctx=>{
+    await model.createIcon({})
+    .then(res=>{
+      ctx.body = {
+          code: 200,
+          data:res,
+          message: '登录成功'
+      }
+    })
 }
 exports.updateIcon = async ctx => {
     let { name, pwd } = ctx.request.body
