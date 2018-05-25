@@ -16,13 +16,18 @@ let updateAd= (arr) => {
     return query(_sql, arr);
   };
 let createAd=(arr) => {
-    console.log(arr);
     let _sql=" INSERT INTO ad_info (img_url,city_id,sort ,remark) VALUES(?,?,?,?); ";
+	return query(_sql, arr)
+}
+
+let insertCity=(arr)=>{
+    let _sql=" INSERT INTO city_info (code,name,remark) VALUES(?,?,?);";
 	return query(_sql, arr)
 }
 
 module.exports = {
     getAd,
     updateAd,
-    createAd
+    createAd,
+    insertCity
 };

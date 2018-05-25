@@ -2,9 +2,10 @@ const model = require('./model.js')
 const md5 = require('md5')
 const checkNotLogin = require('../../middlewares/check.js').checkNotLogin
 const checkLogin = require('../../middlewares/check.js').checkLogin
+const citys=require('../../init/city');
 
 exports.getAd = async ctx => {
-    let {city_id} = ctx.request.body
+    let {city_id} = ctx.request.body;
     await model.getAd(city_id)
         .then(res=>{
             ctx.body = {
@@ -53,10 +54,4 @@ exports.updateAd = async ctx => {
         }).catch(err => {
             console.log(err)
         })
-}
-
-exports.loginOut=async ctx=>{
-    ctx.session = null;
-    ctx.body = true;
-    console.log('登出成功')
 }
